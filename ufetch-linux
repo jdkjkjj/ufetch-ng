@@ -6,58 +6,82 @@
 
 # user is already defined
 host="$(hostname)"
-os='Linux'	# I'd just like to interject for a moment...
+os='GNU/Linux'	# I'd just like to interject for a moment...
 kernel="$(uname -sr)"
 uptime="$(uptime | awk -F, '{sub(".*up ",x,$1);print $1}' | sed -e 's/^[ \t]*//')"
-shell="$(basename ${SHELL})"
+packages='unknown'
+shell="$(basename "${SHELL}")"
+cpu="$(awk -F ': ' '/^(model name|isa|cpu model|Processor|Hardware)/ {print $2; exit}' /proc/cpuinfo)"
+## TODO
+ram_info="$(free -m | awk '/^Mem:/ {used=$3; total=$2; print used, total}')"
+ram="$(echo $ram_info | awk '{print $2}')"
+## UI DETECTION
 
-if [ -z "${WM}" ]; then
-	if [ "${XDG_CURRENT_DESKTOP}" ]; then
-		envtype='DE'
-		WM="${XDG_CURRENT_DESKTOP}"
-	elif [ "${DESKTOP_SESSION}" ]; then
-		envtype='DE'
-		WM="${DESKTOP_SESSION}"
-	else
-		envtype='WM'
-		WM="$(tail -n 1 "${HOME}/.xinitrc" | cut -d ' ' -f 2)"
-	fi
-else
-	envtype='WM'
+parse_rcs() {
+	for f in "${@}"; do
+		wm="$(tail -n 1 "${f}" 2> /dev/null | cut -d ' ' -f 2)"
+		[ -n "${wm}" ] && echo "${wm}" && return
+	done
+}
+
+rcwm="$(parse_rcs "${HOME}/.xinitrc" "${HOME}/.xsession")"
+
+ui='unknown'
+uitype='UI'
+if [ -n "${DE}" ]; then
+	ui="${DE}"
+	uitype='DE'
+elif [ -n "${WM}" ]; then
+	ui="${WM}"
+	uitype='WM'
+elif [ -n "${XDG_CURRENT_DESKTOP}" ]; then
+	ui="${XDG_CURRENT_DESKTOP}"
+	uitype='DE'
+elif [ -n "${DESKTOP_SESSION}" ]; then
+	ui="${DESKTOP_SESSION}"
+	uitype='DE'
+elif [ -n "${rcwm}" ]; then
+	ui="${rcwm}"
+	uitype='WM'
+elif [ -n "${XDG_SESSION_TYPE}" ]; then
+	ui="${XDG_SESSION_TYPE}"
 fi
+
+ui="$(basename "${ui}")"
 
 ## DEFINE COLORS
 
-# probably don't change these
-bold="$(tput bold)"
-black="$(tput setaf 0)"
-red="$(tput setaf 1)"
-green="$(tput setaf 2)"
-yellow="$(tput setaf 3)"
-blue="$(tput setaf 4)"
-magenta="$(tput setaf 5)"
-cyan="$(tput setaf 6)"
-white="$(tput setaf 7)"
-reset="$(tput sgr0)"
+# we will use git shell coloring instead
+	bold='\033[1;37m'
+	black='\033[0;30m'
+	red='\033[0;31m'
+	green='\033[0;33m'
+	yellow='\033[0;33m'
+	blue='\033[0;34m'
+	magenta='\033[0;35m'
+	cyan='\033[0;36m'
+	white='\033[0;37m'
+	reset='\033[0m'
+        block='\xe2\x96\x88'
 
-# you can change these
-lc="${reset}${bold}${black}"	# labels
-nc="${reset}${bold}${black}"	# user and hostname
-ic="${reset}${bold}${white}"	# info
-c0="${reset}${bold}${black}"	# first color
-c1="${reset}${white}"			# second color
-c2="${reset}${yellow}"			# third color
+lc="${reset}${bold}"                # labels
+nc="${reset}${bold}"                # user and hostname
+ic="${reset}"                       # info
+# in some terminals, black will just be black so change it to white
+c0="${reset}"                       # first color
+c1="${reset}${white}"               # second color
+c2="${reset}${yellow}"              # third color
 
 ## OUTPUT
 
-cat <<EOF
-
+# for proper color output we will use printf
+printf "
 ${c0}      ___     ${nc}${USER}${ic}@${nc}${host}${reset}
 ${c0}     (${c1}.. ${c0}\    ${lc}OS:        ${ic}${os}${reset}
-${c0}     (${c2}<> ${c0}|    ${lc}KERNEL:    ${ic}${kernel}${reset}
-${c0}    /${c1}/  \\ ${c0}\\   ${lc}UPTIME:    ${ic}${uptime}${reset}
-${c0}   ( ${c1}|  | ${c0}/|  ${lc}SHELL:     ${ic}${shell}${reset}
-${c2}  _${c0}/\\ ${c1}__)${c0}/${c2}_${c0})  ${lc}${envtype}:        ${ic}${WM}${reset}
-${c2}  \/${c0}-____${c2}\/${reset}
-
-EOF
+${c0}     (${c2}<> ${c0}|    ${lc}Kernel:    ${ic}${kernel}${reset}
+${c0}    /${c1}/  \\ ${c0}\\   ${lc}Uptime:    ${ic}${uptime}${reset}
+${c0}   ( ${c1}|  | ${c0}/|  ${lc}CPU:       ${ic}${cpu}${reset}
+${c2}  _${c0}/\\ ${c1}__)${c0}/${c2}_${c0})  ${lc}Memory:    ${ic}${ram}${reset}
+${c2}  \/${c0}-____${c2}\/${reset}   ${lc}       ${black}${block}${block}${block}${block}${red}${block}${block}${block}${block}${green}${block}${block}${block}${block}${yellow}${block}${block}${block}${block}${blue}${block}${block}${block}${block}${magenta}${block}${block}${block}${block}${cyan}${block}${block}${block}${block}${white}${block}${block}${block}${block}
+${c2}${reset}
+"
