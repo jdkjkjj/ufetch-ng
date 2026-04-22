@@ -1,5 +1,6 @@
-# ufetch
+# ufetch-ng
 
-Tiny system info for Unix-like operating systems.
+Tiny system info for tiny Unix-like operating systems that run on microcontrollers.
 
-![ufetch-openbsd](ufetch-openbsd.png)
+iPod nano 2G running ufetch:
+![ufetch-openbsd](example1.png)
