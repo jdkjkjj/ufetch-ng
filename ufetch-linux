@@ -82,6 +82,6 @@ ${c0}     (${c2}<> ${c0}|    ${lc}Kernel:    ${ic}${kernel}${reset}
 ${c0}    /${c1}/  \\ ${c0}\\   ${lc}Uptime:    ${ic}${uptime}${reset}
 ${c0}   ( ${c1}|  | ${c0}/|  ${lc}CPU:       ${ic}${cpu}${reset}
 ${c2}  _${c0}/\\ ${c1}__)${c0}/${c2}_${c0})  ${lc}Memory:    ${ic}${ram}${reset}
-${c2}  \/${c0}-____${c2}\/${reset}   ${lc}       ${black}${block}${block}${block}${block}${red}${block}${block}${block}${block}${green}${block}${block}${block}${block}${yellow}${block}${block}${block}${block}${blue}${block}${block}${block}${block}${magenta}${block}${block}${block}${block}${cyan}${block}${block}${block}${block}${white}${block}${block}${block}${block}
+${c2}  \/${c0}-____${c2}\/${reset}   ${lc}       {red}${block}${block}${block}${block}${green}${block}${block}${block}${block}${yellow}${block}${block}${block}${block}${blue}${block}${block}${block}${block}${magenta}${block}${block}${block}${block}${cyan}${block}${block}${block}${block}${white}${block}${block}${block}${block}
 ${c2}${reset}
 "
