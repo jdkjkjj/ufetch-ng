@@ -63,6 +63,8 @@ ui="$(basename "${ui}")"
 	white='\033[0;37m'
 	reset='\033[0m'
         block='\xe2\x96\x88'
+## IF ON MODERN HARDWARE USE THE CHARACTER INSTEAD
+##      block='█'
 
 lc="${reset}${bold}"                # labels
 nc="${reset}${bold}"                # user and hostname
