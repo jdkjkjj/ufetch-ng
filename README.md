@@ -1,6 +1,6 @@
 # ufetch-ng
 
-Tiny system info for Unix-like operating systems that is compatible to run on microcontrollers (and modern hardware).
+Tiny and lightweight system info for Unix-like operating systems that is compatible to run on microcontrollers (and modern hardware).
 
 iPod nano 2G running ufetch:
 
