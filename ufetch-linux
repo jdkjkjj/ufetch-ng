@@ -19,10 +19,10 @@ ramused="$(echo $ram_info | awk '{print $1}')"
 ## UI DETECTION
 
 parse_rcs() {
-	for f in "${@}"; do
-		wm="$(tail -n 1 "${f}" 2> /dev/null | cut -d ' ' -f 2)"
-		[ -n "${wm}" ] && echo "${wm}" && return
-	done
+        for f in "${@}"; do
+                wm="$(tail -n 1 "${f}" 2> /dev/null | cut -d ' ' -f 2)"
+                [ -n "${wm}" ] && echo "${wm}" && return
+        done
 }
 
 rcwm="$(parse_rcs "${HOME}/.xinitrc" "${HOME}/.xsession")"
@@ -30,22 +30,22 @@ rcwm="$(parse_rcs "${HOME}/.xinitrc" "${HOME}/.xsession")"
 ui='unknown'
 uitype='UI'
 if [ -n "${DE}" ]; then
-	ui="${DE}"
-	uitype='DE'
+        ui="${DE}"
+        uitype='DE'
 elif [ -n "${WM}" ]; then
-	ui="${WM}"
-	uitype='WM'
+        ui="${WM}"
+        uitype='WM'
 elif [ -n "${XDG_CURRENT_DESKTOP}" ]; then
-	ui="${XDG_CURRENT_DESKTOP}"
-	uitype='DE'
+        ui="${XDG_CURRENT_DESKTOP}"
+        uitype='DE'
 elif [ -n "${DESKTOP_SESSION}" ]; then
-	ui="${DESKTOP_SESSION}"
-	uitype='DE'
+        ui="${DESKTOP_SESSION}"
+        uitype='DE'
 elif [ -n "${rcwm}" ]; then
-	ui="${rcwm}"
-	uitype='WM'
+        ui="${rcwm}"
+        uitype='WM'
 elif [ -n "${XDG_SESSION_TYPE}" ]; then
-	ui="${XDG_SESSION_TYPE}"
+        ui="${XDG_SESSION_TYPE}"
 fi
 
 ui="$(basename "${ui}")"
@@ -72,7 +72,7 @@ lc="${reset}${bold}"                # labels
 nc="${reset}${bold}"                # user and hostname
 ic="${reset}"                       # info
 # in some terminals, black will just be black so change it to white
-c0="${reset}${grey}"                # first color
+c0="${reset}${grey}"               # first color
 c1="${reset}${white}"               # second color
 c2="${reset}${yellow}"              # third color
 
@@ -87,13 +87,10 @@ ${c0}     ##${c1}##${c2}###${c1}##${c0}##         ${lc}CPU:       ${ic}${cpu}${r
 ${c0}    #${c1}##########${c0}##        ${lc}Memory:    ${ic}${ramused}MiB / ${ram}MiB${reset}
 ${c0}   #${c1}############${c0}##       ${lc}
 ${c0}   #${c1}############${c0}###      ${black}${block}${block}${block}${red}${block}${block}${block}${green}${block}${block}${block}${yellow}${block}${block}${block}${blue}${block}${block}${block}${magenta}${block}${block}${block}${cyan}${block}${block}${block}${white}${block}${block}${block}
-${c2}  ##${c0}#${c1}###########${c0}##${c2}#      ${grey}${block}${block}${block}${red}${block}${block}${block}${green}${block}${block}${block}${yellow}${block}${block}${block}${blue}${block}${block}${block}${magenta}${block}${block}${block}${cyan}${block}${block}${block}${white}${block}${block}${block}       
+${c2}  ##${c0}#${c1}###########${c0}##${c2}#      ${grey}${block}${block}${block}${red}${block}${block}${block}${green}${block}${block}${block}${yellow}${block}${block}${block}${blue}${block}${block}${block}${magenta}${block}${block}${block}${cyan}${block}${block}${block}${white}${block}${block}${block}
 ${c2}######${c0}#${c1}#######${c0}#${c2}######
 ${c2}#######${c0}#${c1}#####${c0}#${c2}#######
 ${c2}  #####${c0}#######${c2}#####
 ${c2}
 ${c2}
-"
-${c2}${reset}              ${red}${block}${block}${block}${block}${green}${block}${block}${block}${block}${yellow}${block}${block}${block}${block}${blue}${block}${block}${block}${block}${magenta}${block}${block}${block}${block}${cyan}${block}${block}${block}${block}${white}${block}${block}${block}${block}
-${c2}${reset}
 "
