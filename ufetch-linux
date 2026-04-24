@@ -72,7 +72,7 @@ lc="${reset}${bold}"                # labels
 nc="${reset}${bold}"                # user and hostname
 ic="${reset}"                       # info
 # in some terminals, black will just be black so change it to white
-c0="${reset}${grey}"               # first color
+c0="${reset}${grey}"                # first color
 c1="${reset}${white}"               # second color
 c2="${reset}${yellow}"              # third color
 
