@@ -6,7 +6,7 @@
 
 # user is already defined
 host="$(hostname)"
-os='Linux'	# I'd just like to interject for a moment...
+os="$(grep '^PRETTY_NAME=' /etc/os-release| cut -d'=' -f2 | tr -d '"')"	# I'd just like to interject for a moment...
 kernel="$(uname -sr)"
 uptime="$(uptime | awk -F, '{sub(".*up ",x,$1);print $1}' | sed -e 's/^[ \t]*//')"
 shell="$(basename ${SHELL})"
