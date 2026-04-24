@@ -4,4 +4,4 @@ Tiny and lightweight system info for Unix-like operating systems that is compati
 
 iPod nano 2G running ufetch:
 
-![ufetch-openbsd](example1.png)
+![ufetch-openbsd](example2.png)
