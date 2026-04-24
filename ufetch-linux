@@ -6,7 +6,7 @@
 
 # user is already defined
 host="$(hostname)"
-os='"$(grep '^PRETTY_NAME=' /etc/os-release| cut -d'=' -f2 | tr -d '"')"'
+os="$(grep '^PRETTY_NAME=' /etc/os-release| cut -d'=' -f2 | tr -d '"')"
 kernel="$(uname -sr)"
 uptime="$(uptime | awk -F, '{sub(".*up ",x,$1);print $1}' | sed -e 's/^[ \t]*//')"
 packages='unknown'
