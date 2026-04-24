@@ -15,6 +15,7 @@ cpu="$(awk -F ': ' '/^(model name|isa|cpu model|Processor|Hardware)/ {print $2; 
 ## TODO
 ram_info="$(free -m | awk '/^Mem:/ {used=$3; total=$2; print used, total}')"
 ram="$(echo $ram_info | awk '{print $2}')"
+ramused="$(echo $ram_info | awk '{print $1}')"
 ## UI DETECTION
 
 parse_rcs() {
@@ -83,7 +84,7 @@ ${c0}     (${c1}.. ${c0}\    ${lc}OS:        ${ic}${os}${reset}
 ${c0}     (${c2}<> ${c0}|    ${lc}Kernel:    ${ic}${kernel}${reset}
 ${c0}    /${c1}/  \\ ${c0}\\   ${lc}Uptime:    ${ic}${uptime}${reset}
 ${c0}   ( ${c1}|  | ${c0}/|  ${lc}CPU:       ${ic}${cpu}${reset}
-${c2}  _${c0}/\\ ${c1}__)${c0}/${c2}_${c0})  ${lc}Memory:    ${ic}${ram}${reset}
+${c2}  _${c0}/\\ ${c1}__)${c0}/${c2}_${c0})  ${lc}Memory:    ${ic}${ramused} / ${ram} MiB${reset}
 ${c2}  \/${c0}-____${c2}\/${reset}   ${lc}           ${red}${block}${block}${block}${block}${green}${block}${block}${block}${block}${yellow}${block}${block}${block}${block}${blue}${block}${block}${block}${block}${magenta}${block}${block}${block}${block}${cyan}${block}${block}${block}${block}${white}${block}${block}${block}${block}
 ${c2}${reset}
 "
