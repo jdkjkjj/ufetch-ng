@@ -78,6 +78,7 @@ c2="${reset}${yellow}"              # third color
 ## OUTPUT
 
 # for proper color output we will use printf
+# MAKE SURE GITHUB ADDS THIS EDIT for copying
 printf "
 ${c0}      ___     ${nc}${USER}${ic}@${nc}${host}${reset}
 ${c0}     (${c1}.. ${c0}\    ${lc}OS:        ${ic}${os}${reset}
