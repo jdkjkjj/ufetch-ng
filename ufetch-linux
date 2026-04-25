@@ -80,11 +80,11 @@ c2="${reset}${yellow}"              # third color
 
 # for proper color output we will use printf
 printf "${c0}        #####            ${nc}${USER}${ic}@${nc}${host}${reset}
-${c0}       #######           ${lc}OS:        ${ic}${os}${reset}
-${c0}       ##${c1}O${c0}#${c1}O${c0}##           ${lc}Kernel:    ${ic}${kernel}${reset}
-${c0}       #${c2}#####${c0}#           ${lc}Uptime:    ${ic}${uptime}${reset}
-${c0}     ##${c1}##${c2}###${c1}##${c0}##         ${lc}CPU:       ${ic}${cpu}${reset}
-${c0}    #${c1}##########${c0}##        ${lc}Memory:    ${ic}${ramused}MiB / ${ram}MiB${reset}
+${c0}       #######           ${lc}OS: ${ic}${os}${reset}
+${c0}       ##${c1}O${c0}#${c1}O${c0}##           ${lc}Kernel: ${ic}${kernel}${reset}
+${c0}       #${c2}#####${c0}#           ${lc}Uptime: ${ic}${uptime}${reset}
+${c0}     ##${c1}##${c2}###${c1}##${c0}##         ${lc}CPU: ${ic}${cpu}${reset}
+${c0}    #${c1}##########${c0}##        ${lc}Memory: ${ic}${ramused}MiB / ${ram}MiB${reset}
 ${c0}   #${c1}############${c0}##       ${lc}
 ${c0}   #${c1}############${c0}###      ${black}${block}${block}${block}${red}${block}${block}${block}${green}${block}${block}${block}${yellow}${block}${block}${block}${blue}${block}${block}${block}${magenta}${block}${block}${block}${cyan}${block}${block}${block}${white}${block}${block}${block}
 ${c2}  ##${c0}#${c1}###########${c0}##${c2}#      ${grey}${block}${block}${block}${red}${block}${block}${block}${green}${block}${block}${block}${yellow}${block}${block}${block}${blue}${block}${block}${block}${magenta}${block}${block}${block}${cyan}${block}${block}${block}${white}${block}${block}${block}
